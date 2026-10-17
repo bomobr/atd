@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Tinta: azul-petróleo bem escuro, base do painel e dos textos */
+  --color-tinta: #14232e;
+  --color-tinta-2: #1b2f3d;
+  --color-tinta-3: #2a4354;
+  --color-nevoa: #93a8b4;
+
+  /* Papel: fundo claro da tela do cliente */
+  --color-papel: #fbfcfb;
+  --color-linha: #e1e7e9;
+  --color-cinza: #566771;
+
+  /* Garçom: verde-azulado */
+  --color-garcom: #0e7c66;
+  --color-garcom-escuro: #0a5f4e;
+  --color-garcom-claro: #dcf1eb;
+
+  /* Conta: âmbar */
+  --color-conta: #f5b12e;
+  --color-conta-escuro: #b77a06;
+  --color-conta-claro: #fdf0d2;
+
+  --color-alerta: #e0452f;
+
+  --animate-chegada: chegada 900ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  --animate-pulso-alerta: pulso-alerta 1.6s ease-in-out infinite;
+
+  @keyframes chegada {
+    0% {
+      transform: scale(0.85);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes pulso-alerta {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-alerta) 70%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-alerta) 0%, transparent);
+    }
+  }
+}
+
+/* O número da mesa: largo, pesado e com algarismos de largura fixa.
+   É o mesmo tratamento na plaquinha impressa, no celular e no painel. */
+@utility numeral {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.03em;
+  line-height: 0.82;
+}
+
+@utility largo {
+  font-stretch: 112%;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01" off;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-conta);
+    outline-offset: 3px;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
